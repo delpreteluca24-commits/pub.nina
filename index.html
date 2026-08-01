@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NINA — Pub · La Spezia</title>
+<meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
+<meta name="theme-color" content="#0f2018">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NINA">
+<meta property="og:title" content="NINA — Pub · La Spezia">
+<meta property="og:description" content="Carta dei drink: cocktail, birre e distillati. Tocca o inquadra per il menù.">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://pubnina.netlify.app">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230c100e'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='%23c9a76b' font-family='Georgia,serif'%3EN%3C/text%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   NINA — Pub · La Spezia — Landing + Carta Drink
+   DP System · file unico offline · IT/EN/DE/FR/ES
+   Palette: nero opaco · verde bosco · oro satinato
+   ============================================================ */
+:root{
+  --ink:#081310;
+  --surface:#102019;
+  --surface2:#0b1712;
+  --green:#1f4632;
+  --gold:#c8a86c;
+  --gold-soft:rgba(200,168,108,.13);
+  --line:rgba(160,185,160,.15);
+  --text:#eae7db;
+  --muted:#9fb0a2;
+  --shadow:0 16px 38px rgba(0,0,0,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:
+    radial-gradient(1000px 520px at 50% -160px, rgba(31,70,50,.75), transparent 72%),
+    linear-gradient(180deg, #0b1712 0%, var(--ink) 60%);
+  color:var(--text);
+  line-height:1.55;
+  min-height:100vh;
+}
+.wrap{max-width:460px;margin:0 auto;padding:0 18px}
+.serif{font-family:Georgia,"Times New Roman",serif}
+
+/* ---------- barra oro superiore ---------- */
+.goldbar{height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.8}
+
+/* ---------- selettore lingua ---------- */
+.langs{display:flex;gap:6px;justify-content:center}
+.lang{
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  font:600 11px system-ui;letter-spacing:.12em;
+  padding:7px 10px;border-radius:999px;cursor:pointer;min-width:40px;
+  transition:color .25s,border-color .25s,background .25s,transform .15s;
+}
+.lang:active{transform:scale(.92)}
+.lang.on{color:var(--ink);background:var(--gold);border-color:var(--gold)}
+
+/* ---------- HUB ---------- */
+#hub{padding:40px 0 30px}
+.hub-langs{margin-bottom:30px}
+.eyebrow{
+  text-align:center;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:14px;
+}
+.logo{
+  text-align:center;font-weight:700;letter-spacing:.14em;
+  font-size:clamp(52px,17vw,72px);line-height:1;color:var(--text);
+}
+.logo em{font-style:normal;color:var(--gold)}
+.divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 12px;color:var(--gold)}
+.divider::before,.divider::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,transparent,var(--gold));opacity:.6}
+.divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.tagline{text-align:center;font-style:italic;font-size:15.5px;color:var(--muted);padding:0 10px}
+.addr{text-align:center;font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.04em}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.card{
+  display:flex;flex-direction:column;justify-content:center;gap:6px;
+  background:linear-gradient(160deg,var(--surface),var(--surface2));
+  border:1px solid var(--line);border-radius:16px;
+  padding:18px 16px;min-height:82px;
+  color:var(--text);text-decoration:none;
+  box-shadow:var(--shadow);
+  transition:transform .15s,border-color .25s;
+}
+.card:active{transform:scale(.97)}
+.card .ic{color:var(--gold)}
+.card .ic svg{width:22px;height:22px;display:block}
+.card .lb{font-weight:600;font-size:14.5px;letter-spacing:.02em}
+.card.primary{
+  grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;
+  border-color:var(--gold-soft);
+  background:linear-gradient(135deg,var(--green),var(--surface2));
+  min-height:96px;
+}
+.card.primary .lb{font-size:19px;letter-spacing:.03em}
+.card.primary .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.card.primary .arrow{color:var(--gold);font-size:24px}
+.card.review{border-color:var(--gold-soft)}
+.card.review .lb{color:var(--gold)}
+.hidden{display:none!important}
+
+/* ---------- MENU VIEW ---------- */
+#menuView{display:none}
+#menuView.open{display:block}
+body.menu-open #hub{display:none}
+.mhead{
+  position:sticky;top:0;z-index:60;
+  background:#0b1712;
+  border-bottom:1px solid var(--line);
+}
+.mhead-in{max-width:460px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.back{
+  border:1px solid var(--line);background:transparent;color:var(--gold);
+  border-radius:999px;min-width:42px;height:38px;cursor:pointer;
+  font:600 15px system-ui;display:flex;align-items:center;justify-content:center;
+}
+.mtitle{font-weight:700;letter-spacing:.18em;font-size:17px;flex:1}
+.mtitle em{font-style:normal;color:var(--gold)}
+.catnav{
+  position:sticky;top:63px;z-index:55;
+  background:#0b1712;
+  border-bottom:1px solid var(--line);
+}
+.catnav-in{display:flex;gap:8px;overflow-x:auto;padding:10px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch;max-width:460px;margin:0 auto}
+.catnav-in::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--muted);
+  font:600 12.5px system-ui;padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap;
+  transition:background .3s,color .3s,border-color .3s,transform .15s;
+}
+.tab:active{transform:scale(.94)}
+.tab.active{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+main{padding:6px 0 20px}
+section.cat{padding-top:26px;scroll-margin-top:118px}
+.cat-title{font-size:25px;font-weight:600;letter-spacing:.05em;margin:0 2px 2px}
+.cat-rule{display:flex;align-items:center;gap:10px;margin:6px 0 16px;color:var(--gold);font-size:11px}
+.cat-rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--gold),transparent);opacity:.45}
+.gt-note{
+  border:1px solid var(--gold-soft);border-radius:12px;background:var(--surface2);
+  padding:10px 14px;margin:0 0 14px;font-size:13px;color:var(--text);letter-spacing:.02em;
+}
+.gt-note b{color:var(--gold);font-weight:700}
+
+/* scheda bottiglia */
+.it{
+  display:flex;gap:14px;
+  background:linear-gradient(160deg,var(--surface),var(--surface2));
+  border:1px solid var(--line);border-radius:16px;
+  padding:16px 15px;margin-bottom:12px;box-shadow:var(--shadow);
+}
+.bottle{position:relative;flex:0 0 40px;display:flex;align-items:flex-start;justify-content:center;padding-top:2px}
+.bottle svg{width:34px;height:76px;display:block;color:var(--gold);opacity:.9}
+.bottle .dot{position:absolute;top:34px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--c,transparent);box-shadow:0 0 8px var(--c,transparent)}
+.itbody{flex:1;min-width:0}
+.row{display:flex;align-items:baseline;gap:8px}
+.iname{font-size:16.5px;font-weight:600;line-height:1.25;letter-spacing:.01em}
+.dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);min-width:12px}
+.price{font-weight:700;font-size:14.5px;white-space:nowrap;color:var(--gold);letter-spacing:.02em}
+.price.tbd{opacity:.45}
+.meta{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-top:3px;font-weight:600}
+.desc{font-size:13px;color:var(--muted);margin-top:7px}
+.notes{font-size:12.5px;color:var(--text);margin-top:7px}
+.notes::before{content:"✦ ";color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.chip{font-size:10.5px;font-weight:600;letter-spacing:.03em;background:var(--gold-soft);color:var(--gold);border-radius:999px;padding:3px 9px}
+.serve{font-size:12px;font-style:italic;color:var(--muted);margin-top:9px}
+
+/* voce semplice (cocktail/vini) */
+.li{padding:12px 2px;border-bottom:1px solid rgba(201,167,107,.09)}
+.li .row .iname{font-size:15px;font-weight:500;font-family:system-ui}
+.li .sub{font-size:12px;color:var(--muted);margin-top:3px}
+.plist{background:linear-gradient(160deg,var(--surface),var(--surface2));border:1px solid var(--line);border-radius:16px;padding:6px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+.plist .li:last-child{border-bottom:none}
+.grp{font:700 10.5px system-ui;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.85;padding:15px 2px 5px}
+.grp:first-child{padding-top:4px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
+
+/* footer */
+footer{margin-top:34px;border-top:1px solid var(--line);padding:26px 18px 40px;display:none}
+body.menu-open footer{display:block}
+.foot-in{max-width:460px;margin:0 auto;text-align:center}
+.allerg{font-size:12px;color:var(--muted);margin-bottom:14px}
+.legal{font-size:11px;line-height:1.55;color:var(--muted);opacity:.92;margin-bottom:16px}
+.legal p{margin:6px 0}
+.legal-biz{color:var(--text);font-weight:600}
+.powered{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.7}
+noscript{display:block;padding:30px;text-align:center}
+</style>
+</head>
+<body>
+<div class="goldbar"></div>
+
+
+<!-- ================= HUB ================= -->
+<section id="hub">
+  <div class="wrap">
+    <div class="langs hub-langs" id="langsHub"></div>
+    <div class="eyebrow" data-t="eyebrow">Birra · Gin Tonic · Drinks</div>
+    <h1 class="logo serif">NIN<em>A</em></h1>
+    <div class="divider" aria-hidden="true">✦</div>
+    <p class="addr" id="addrLine"></p>
+
+    <div class="cards">
+      <a class="card primary" href="#menu" id="openMenuBtn">
+        <span>
+          <span class="lb" data-t="drinks">Carta dei Drink</span>
+          <div class="sub" data-t="drinksSub"></div>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="card" id="waBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.5 2.5 3 5 5.5 5.5l1.5-1.5 2 1.5c-.5 1.5-2 2-3.5 1.5-3-1-6-4-7-7-.5-1.5 0-3 1.5-3.5l1.5 2-1.5 1.5z" fill="currentColor" stroke="none" opacity=".8"/></svg></span>
+        <span class="lb">WhatsApp</span>
+      </a>
+      <a class="card" id="callBtn">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l1.5 4.5L8 10c1 2.5 3.5 5 6 6l1.5-2.5L20 15v4a1.5 1.5 0 0 1-1.7 1.5C10.5 19.6 4.4 13.5 3.5 5.7A1.5 1.5 0 0 1 5 4z"/></svg></span>
+        <span class="lb" data-t="call">Chiama</span>
+      </a>
+      <a class="card" id="mapBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-6.5-5.5-6.5-10.5a6.5 6.5 0 1 1 13 0C18.5 15.5 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></svg></span>
+        <span class="lb" data-t="map">Mappa</span>
+      </a>
+      <a class="card review" id="revBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.6 1-4.7 4.6 1.1 6.5L12 17.4l-5.9 3.1 1.1-6.5L2.5 9.4l6.6-1L12 2.5z"/></svg></span>
+        <span class="lb" data-t="review">Lascia una recensione</span>
+      </a>
+      <!-- Instagram / Facebook: si mostrano da soli quando compili BIZ.instagram / BIZ.facebook -->
+      <a class="card hidden" id="igBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+        <span class="lb">Instagram</span>
+      </a>
+      <a class="card hidden" id="fbBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 21v-7h2.6l.4-3h-3V9.1c0-.9.3-1.6 1.7-1.6h1.4V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H9v3h2.5v7"/></svg></span>
+        <span class="lb">Facebook</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENU ================= -->
+<div id="menuView">
+  <div class="mhead">
+    <div class="mhead-in">
+      <button class="back" id="backBtn" aria-label="Indietro">←</button>
+      <div class="mtitle serif">NIN<em>A</em></div>
+      <div class="langs" id="langsMenu"></div>
+    </div>
+  </div>
+  <nav class="catnav" aria-label="Categorie"><div class="catnav-in" id="catTabs"></div></nav>
+  <main class="wrap" id="menuRoot">
+    <noscript>Il menù richiede JavaScript. / This menu requires JavaScript.</noscript>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-in">
+    <p class="allerg" data-t="allerg"></p>
+    <div class="legal">
+      <p data-t="legalMinori"></p>
+      <p data-t="legalSurgelati"></p>
+      <p data-t="legalPrivacy"></p>
+      <p class="legal-biz" id="legalBiz">NINA · Via Sapri 73 — 19121 La Spezia (SP) · P.IVA 01589730116</p>
+    </div>
+    <div class="powered">Powered by DP System</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURAZIONE — MODIFICA SOLO QUI
+   ------------------------------------------------------------
+   ► BIZ: contatti in un punto solo.
+   ► I dati del menu sono negli array COCKTAILS, BIRRE, GIN_CLASSICI,
+     GIN_SELEZIONE, WHISKY, RUM, TEQUILA, AMARI (prezzi testo libero).
+     Whisky/Rum: b = prezzo bicchiere, s = prezzo shot (null = assente).
+   ============================================================ */
+const BIZ = {
+  name: "NINA",
+  phone: "+393516315891",
+  phoneDisplay: "+39 351 631 5891",
+  whatsapp: "393516315891",           // wa.me senza +
+  address: "Via Sapri 73 — 19121 La Spezia (SP)",
+  mapsUrl: "https://maps.app.goo.gl/eKJyrL3U2DXRG3Hh9?g_st=ic",
+  reviewUrl: "https://maps.app.goo.gl/eKJyrL3U2DXRG3Hh9?g_st=ic",
+  instagram: "",                      // TODO: es. "https://instagram.com/xxxx" — vuoto = card nascosta
+  facebook: ""                        // TODO: vuoto = card nascosta
+};
+
+/* ---------- lingue: 0=IT 1=EN 2=DE 3=FR 4=ES ---------- */
+const LANGS = ["IT","EN","DE","FR","ES"];
+let li = 0;
+
+const T = {
+  eyebrow:["Birra · Gin Tonic · Drinks","Beer · Gin Tonic · Drinks","Bier · Gin Tonic · Drinks","Bière · Gin Tonic · Drinks","Cerveza · Gin Tonic · Copas"],
+  drinks:["Carta dei Drink","Drink Menu","Getränkekarte","Carte des boissons","Carta de bebidas"],
+  drinksSub:["Gin · Whisky · Tequila · Birre · Cocktail","Gin · Whisky · Tequila · Beers · Cocktails","Gin · Whisky · Tequila · Biere · Cocktails","Gin · Whisky · Tequila · Bières · Cocktails","Gin · Whisky · Tequila · Cervezas · Cócteles"],
+  call:["Chiama","Call","Anrufen","Appeler","Llamar"],
+  map:["Mappa","Map","Karte","Plan","Mapa"],
+  review:["Lascia una recensione","Leave a review","Bewertung hinterlassen","Laisser un avis","Deja una reseña"],
+  allerg:["Informazioni su allergeni e intolleranze disponibili su richiesta al personale (Reg. UE 1169/2011).","Allergen and intolerance information available on request from our staff (EU Reg. 1169/2011).","Informationen zu Allergenen und Unverträglichkeiten auf Anfrage beim Personal (EU-Verordnung 1169/2011).","Informations sur les allergènes et intolérances disponibles sur demande auprès du personnel (Règl. UE 1169/2011).","Información sobre alérgenos e intolerancias disponible a petición del personal (Regl. UE 1169/2011)."],
+  legalMinori:["Vietata la somministrazione di bevande alcoliche ai minori di anni 18 (art. 14-ter L. 125/2001). Bevi responsabilmente.","Serving alcohol to under-18s is prohibited (Italian Law 125/2001). Please drink responsibly.","Ausschank von Alkohol an unter 18-Jährige verboten (Gesetz 125/2001). Bitte verantwortungsvoll trinken.","Vente d'alcool interdite aux moins de 18 ans (loi it. 125/2001). À consommer avec modération.","Prohibida la venta de alcohol a menores de 18 años (Ley it. 125/2001). Bebe con responsabilidad."],
+  legalSurgelati:["Alcuni prodotti possono essere surgelati all'origine o abbattuti: l'elenco è disponibile su richiesta.","Some products may be frozen at source or blast-chilled; the list is available on request.","Einige Produkte können ursprungstiefgekühlt oder schockgefrostet sein; Liste auf Anfrage.","Certains produits peuvent être surgelés à l'origine ou abattus ; liste sur demande.","Algunos productos pueden estar congelados en origen o abatidos; lista a petición."],
+  legalPrivacy:["Questo sito non utilizza cookie di profilazione o strumenti di tracciamento.","This site uses no profiling cookies or tracking tools.","Diese Seite verwendet keine Profiling-Cookies oder Tracking-Tools.","Ce site n'utilise ni cookies de profilage ni outils de suivi.","Este sitio no usa cookies de perfilado ni de seguimiento."],
+  ginBase:["Classici","Classics","Klassiker","Classiques","Clásicos"],
+  ginSup:["Selezione","Selection","Auswahl","Sélection","Selección"],
+  bicchiere:["Bicchiere","Glass","Glas","Verre","Copa"],
+  mediaPiccola:["Media / Piccola","Large / Small","Groß / Klein","Grande / Petite","Grande / Pequeña"],
+  birreNote:["Tutte disponibili in <b>media</b> e <b>piccola</b>","All available in <b>large</b> and <b>small</b>","Alle in <b>groß</b> und <b>klein</b>","Toutes en <b>grande</b> et <b>petite</b>","Todas en <b>grande</b> y <b>pequeña</b>"],
+  bicShot:["Bicchiere / Shot","Glass / Shot","Glas / Shot","Verre / Shot","Copa / Shot"],
+  amariNote:["Bicchiere <b>€ 5</b> · Shot <b>€ 3</b>","Glass <b>€ 5</b> · Shot <b>€ 3</b>","Glas <b>€ 5</b> · Shot <b>€ 3</b>","Verre <b>€ 5</b> · Shot <b>€ 3</b>","Copa <b>€ 5</b> · Shot <b>€ 3</b>"],
+  bottiglia:["Bottiglia","Bottle","Flasche","Bouteille","Botella"],
+  vino:["Vino al calice","Wine by the glass","Wein im Glas","Vin au verre","Vino por copa"],
+  prosecco:["Prosecco al calice","Prosecco by the glass","Prosecco im Glas","Prosecco au verre","Prosecco por copa"],
+  analc:["Spritz analcolico","Non-alcoholic spritz","Alkoholfreier Spritz","Spritz sans alcool","Spritz sin alcohol"],
+  vol:["Vol.","Vol.","Vol.","Vol.","Vol."],
+  tagliere:["Tagliere","Sharing board","Brettljause","Planche","Tabla"],
+  tagliereSub:["Tris di focaccine farcite: prosciutto crudo, rucola e pomodorini · gorgonzola e pomodorini secchi · salametto Milano e fontina.","Trio of stuffed focaccine: cured ham, rocket & cherry tomatoes · gorgonzola & sun-dried tomatoes · Milano salami & fontina.","Trio gefüllter Focaccine: Rohschinken, Rucola & Kirschtomaten · Gorgonzola & getrocknete Tomaten · Salame Milano & Fontina.","Trio de focaccine garnies : jambon cru, roquette & tomates cerises · gorgonzola & tomates séchées · salami Milano & fontina.","Trío de focaccine rellenas: jamón crudo, rúcula y tomatitos · gorgonzola y tomates secos · salami Milano y fontina."]
+};
+
+const SEC = {
+  cocktail:["Cocktail & Spritz","Cocktails & Spritz","Cocktails & Spritz","Cocktails & Spritz","Cócteles & Spritz"],
+  spina:["Birre alla Spina","Draught Beers","Biere vom Fass","Bières pression","Cervezas de barril"],
+  tagliere:["Tagliere","Sharing Board","Brettljause","Planche","Tabla"],
+  vini:["Vini & Bollicine","Wines & Bubbles","Wein & Schaumwein","Vins & bulles","Vinos y burbujas"],
+  gin:["Gin Tonic","Gin & Tonic","Gin Tonic","Gin Tonic","Gin Tonic"],
+  whisky:["Whisky","Whisky","Whisky","Whisky","Whisky"],
+  rum:["Rum","Rum","Rum","Rhum","Ron"],
+  tequila:["Tequila","Tequila","Tequila","Tequila","Tequila"],
+  amari:["Amari & Liquori","Amari & Liqueurs","Amari & Liköre","Amari & Liqueurs","Amari y Licores"]
+};
+const ORDER = ["cocktail","spina","tagliere","vini","gin","whisky","rum","tequila","amari"];
+
+/* ============================================================
+   MENU - dati dalla titolare (prezzi reali)
+   ============================================================ */
+const COCKTAILS = [
+  {p:"€ 9", l:["Spritz Hugo Saint Germain","Caipiroska Frutta"]},
+  {p:"€ 8", l:["Gin Lemon","Caipiroska","Vodka Red Bull / Lemon","Vodka Tonic","Paloma","Whisky Sour","Moscow Mule","Daikiri","Long Island","Margarita / Tommy's Margarita","Mojito","Negroni","Negroni Sbagliato","Boulevardier","Caipirinha","Cocktail Martini","Cuba Libre","Fernet Cola","Spritz Campari","Spritz Limoncello","Spritz Venturo","Virgin Mojito","Americano","Spritz Aperol","Analcolico alla Frutta"]},
+  {p:"€ 7", l:["Spritz Passoa","Malibu Cola","Michelada","Spritz Cynar"]}
+];
+const BIRRE = [
+  {n:"Ichnusa", p:"€ 6", ps:"€ 3"},
+  {n:"Messina Cristalli di Sale", p:"€ 7", ps:"€ 4"},
+  {n:"Blanche de Bruxelles", p:"€ 7", ps:"€ 4"},
+  {n:"Neck Oil Session IPA", p:"€ 7", ps:"€ 4"}
+];
+const GIN_CLASSICI = [
+  {n:"Beefeater", p:"€ 10"},
+  {n:"Tanqueray", p:"€ 12"},
+  {n:"Gordon's", p:"€ 8"},
+  {n:"Bombay Sapphire", p:"€ 10"},
+  {n:"The Botanist", p:"€ 10"},
+  {n:"Dolce Vita", p:"€ 10"},
+  {n:"Alkemist", p:"€ 12"}
+];
+const GIN_SELEZIONE = [
+  {n:"Malfy Classico", p:"€ 10"},
+  {n:"Gin Mare", p:"€ 11"},
+  {n:"Etsu", p:"€ 12"},
+  {n:"Roku Sakura", p:"€ 14"},
+  {n:"Monkey 47", p:"€ 12"},
+  {n:"Hendrick's Classic", p:"€ 10"},
+  {n:"Hendrick's (edizioni)", p:"€ 12"},
+  {n:"Tanqueray Ten", p:"€ 12"},
+  {n:"Bulldog", p:"€ 10"},
+  {n:"Portofino", p:"€ 12"},
+  {n:"Yu Gin", p:"€ 12"},
+  {n:"Citadelle", p:"€ 10"},
+  {n:"Nordés", p:"€ 12"},
+  {n:"Engine", p:"€ 14"},
+  {n:"The Illusionist", p:"€ 14"},
+  {n:"Amuerte", p:"€ 15"},
+  {n:"Elephant", p:"€ 12"}
+];
+const WHISKY = [
+  {n:"Jack Daniel's", b:"7", s:"4"},
+  {n:"Ballantine's", b:"7", s:null},
+  {n:"Johnnie Walker Black", b:"8", s:"4"},
+  {n:"Johnnie Walker Double Black", b:"10", s:"6"},
+  {n:"Johnnie Walker Gold Label", b:"12", s:"6"},
+  {n:"Whisky Giapponese", b:"10", s:"5"}
+];
+const RUM = [
+  {n:"Bacardi", b:"5", s:"3"},
+  {n:"Havana Club", b:"5", s:"3"},
+  {n:"Malibu", b:null, s:"3"},
+  {n:"Diplomático", b:"9", s:"5"},
+  {n:"Don Papa", b:"8", s:"5"},
+  {n:"Matusalem", b:"5", s:"3"},
+  {n:"Barceló", b:"5", s:"3"},
+  {n:"Bumbu", b:"6", s:"4"}
+];
+const TEQUILA = [
+  {n:"Jose Cuervo Silver", b:null, s:"3"},
+  {n:"Jose Cuervo Reposado", b:null, s:"3"},
+  {n:"Don Julio Silver", b:null, s:"7"},
+  {n:"Don Julio Reposado", b:null, s:"8"}
+];
+const AMARI = ["Montenegro","Unicum","Jägermeister","Camatti","Amaro del Capo","Vermouth di Torino","Limoncello","Fernet Branca","Branca Menta","Baileys"];
+
+/* ============================================================
+   LOGICA — da qui in giù non serve modificare
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+(function initLang(){
+  const saved = parseInt(store.get("nina_lang"),10);
+  if(!isNaN(saved) && saved>=0 && saved<5) li = saved;
+})();
+
+function tt(key){ return T[key][li]; }
+
+function renderLangPills(){
+  ["langsHub","langsMenu"].forEach(id=>{
+    const box = document.getElementById(id);
+    box.innerHTML = "";
+    LANGS.forEach((l,i)=>{
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "lang" + (i===li ? " on" : "");
+      b.textContent = l;
+      b.setAttribute("aria-label", "Lingua: " + l);
+      b.setAttribute("aria-pressed", i===li ? "true" : "false");
+      b.addEventListener("click", ()=>{
+        li = i; store.set("nina_lang", String(i));
+        document.documentElement.lang = l.toLowerCase();
+        renderAll();
+      });
+      box.appendChild(b);
+    });
+  });
+}
+
+function renderStatic(){
+  document.querySelectorAll("[data-t]").forEach(el=>{
+    const k = el.getAttribute("data-t");
+    if(T[k]) el.textContent = T[k][li];
+  });
+  $("#addrLine").textContent = BIZ.address;
+  $("#waBtn").href = "https://wa.me/" + BIZ.whatsapp;
+  $("#callBtn").href = "tel:" + BIZ.phone;
+  $("#mapBtn").href = BIZ.mapsUrl;
+  $("#revBtn").href = BIZ.reviewUrl;
+  if(BIZ.instagram){ $("#igBtn").href = BIZ.instagram; $("#igBtn").classList.remove("hidden"); }
+  if(BIZ.facebook){ $("#fbBtn").href = BIZ.facebook; $("#fbBtn").classList.remove("hidden"); }
+}
+
+function spiritLine(x){
+  var price, sub;
+  if(x.b && x.s){ price = "€ " + x.b + " / € " + x.s; sub = tt("bicShot"); }
+  else if(x.b){ price = "€ " + x.b; sub = tt("bicchiere"); }
+  else { price = "€ " + x.s; sub = "Shot"; }
+  return simpleLine(x.n, price, sub);
+}
+
+function nameLine(n){
+  return '<div class="li"><div class="row"><span class="iname">' + n + '</span></div></div>';
+}
+
+function simpleLine(name, price, sub){
+  return '<div class="li"><div class="row"><span class="iname">' + name + '</span><span class="dots"></span><span class="price">' + price + '</span></div>' + (sub ? '<div class="sub">' + sub + '</div>' : '') + '</div>';
+}
+
+function renderMenu(){
+  const nav = $("#catTabs");
+  const root = $("#menuRoot");
+  nav.innerHTML = "";
+  root.querySelectorAll("section").forEach(s=>s.remove());
+
+  ORDER.forEach(cid=>{
+    const btn = document.createElement("button");
+    btn.className = "tab";
+    btn.textContent = SEC[cid][li];
+    btn.dataset.target = "cat-" + cid;
+    btn.addEventListener("click", ()=>{
+      document.getElementById("cat-" + cid).scrollIntoView({behavior: reducedMotion ? "auto" : "smooth"});
+    });
+    nav.appendChild(btn);
+
+    const sec = document.createElement("section");
+    sec.className = "cat";
+    sec.id = "cat-" + cid;
+    sec.innerHTML = '<h2 class="cat-title serif">' + SEC[cid][li] + '</h2><div class="cat-rule">✦</div>';
+
+    if(cid === "cocktail"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      let h = "";
+      COCKTAILS.forEach(g => { h += '<div class="grp">' + g.p + '</div>'; g.l.forEach(nn => h += simpleLine(nn, g.p)); });
+      box.innerHTML = h;
+      sec.appendChild(box);
+    } else if(cid === "spina"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      const bn = document.createElement("div");
+      bn.className = "gt-note";
+      bn.innerHTML = tt("birreNote");
+      sec.appendChild(bn);
+      box.innerHTML = BIRRE.map(x => simpleLine(x.n, x.p + " / " + x.ps, tt("mediaPiccola"))).join("");
+      sec.appendChild(box);
+    } else if(cid === "tagliere"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = simpleLine(T.tagliere[li], "€ 3", T.tagliereSub[li]);
+      sec.appendChild(box);
+    } else if(cid === "vini"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = simpleLine(T.vino[li], "€ 6 / € 7") + simpleLine(T.prosecco[li], "€ 6 / € 7") + simpleLine(T.bottiglia[li], "€ 25");
+      sec.appendChild(box);
+    } else if(cid === "gin"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      let h = '<div class="grp">' + tt("ginBase") + '</div>';
+      GIN_CLASSICI.forEach(x => h += simpleLine(x.n, x.p));
+      h += '<div class="grp">' + tt("ginSup") + '</div>';
+      GIN_SELEZIONE.forEach(x => h += simpleLine(x.n, x.p));
+      box.innerHTML = h;
+      sec.appendChild(box);
+    } else if(cid === "whisky"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = WHISKY.map(spiritLine).join("");
+      sec.appendChild(box);
+    } else if(cid === "rum"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = RUM.map(spiritLine).join("");
+      sec.appendChild(box);
+    } else if(cid === "tequila"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = TEQUILA.map(spiritLine).join("");
+      sec.appendChild(box);
+    } else if(cid === "amari"){
+      const gt = document.createElement("div");
+      gt.className = "gt-note";
+      gt.innerHTML = tt("amariNote");
+      sec.appendChild(gt);
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = AMARI.map(nameLine).join("");
+      sec.appendChild(box);
+    }
+    root.appendChild(sec);
+  });
+
+  initReveal();
+  initSpy();
+}
+
+let revealObs=null, spyObs=null;
+function initReveal(){
+  if(revealObs) revealObs.disconnect();
+  const items = document.querySelectorAll(".reveal");
+  if(reducedMotion || !("IntersectionObserver" in window)){
+    items.forEach(el=>el.classList.add("visible")); return;
+  }
+  revealObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); revealObs.unobserve(e.target); } });
+  },{threshold:.06});
+  items.forEach(el=>revealObs.observe(el));
+}
+
+function initSpy(){
+  if(spyObs) spyObs.disconnect();
+  const tabs = [...document.querySelectorAll(".tab")];
+  const setActive = id => {
+    tabs.forEach(t=>t.classList.toggle("active", t.dataset.target===id));
+    const a = tabs.find(t=>t.dataset.target===id);
+    if(a) a.scrollIntoView({behavior: reducedMotion ? "auto" : "smooth", block:"nearest", inline:"center"});
+  };
+  if(!("IntersectionObserver" in window)){ if(tabs[0]) setActive(tabs[0].dataset.target); return; }
+  spyObs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); });
+  },{rootMargin:"-30% 0px -62% 0px"});
+  document.querySelectorAll("section.cat").forEach(s=>spyObs.observe(s));
+  if(tabs[0]) tabs[0].classList.add("active");
+}
+
+/* ---------- viste hub/menu ---------- */
+function syncView(){
+  const open = location.hash === "#menu";
+  document.body.classList.toggle("menu-open", open);
+  $("#menuView").classList.toggle("open", open);
+  if(open) window.scrollTo(0,0);
+}
+$("#backBtn").addEventListener("click", ()=>{ history.length > 1 ? history.back() : (location.hash = ""); });
+window.addEventListener("hashchange", syncView);
+
+function renderAll(){
+  renderLangPills();
+  renderStatic();
+  renderMenu();
+}
+
+document.documentElement.lang = LANGS[li].toLowerCase();
+renderAll();
+syncView();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarOrPub",
+  "name": "NINA",
+  "url": "https://pubnina.netlify.app",
+  "address": {"@type": "PostalAddress", "streetAddress": "Via Sapri 73", "addressLocality": "La Spezia", "addressCountry": "IT"},
+  "telephone": "+393516315891",
+  "servesCuisine": ["Cocktail bar", "Pub"],
+  "priceRange": "€€"
+}
+</script>
+</body>
+</html>
