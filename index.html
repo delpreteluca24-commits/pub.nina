@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-08-01-D">
+<meta name="x-build" content="2026-08-01-E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -322,7 +322,7 @@ const T = {
   mediaPiccola:["Media / Piccola","Large / Small","Groß / Klein","Grande / Petite","Grande / Pequeña"],
   birreNote:["Tutte disponibili in <b>media</b> e <b>piccola</b>","All available in <b>large</b> and <b>small</b>","Alle in <b>groß</b> und <b>klein</b>","Toutes en <b>grande</b> et <b>petite</b>","Todas en <b>grande</b> y <b>pequeña</b>"],
   bicShot:["Bicchiere / Shot","Glass / Shot","Glas / Shot","Verre / Shot","Copa / Shot"],
-  amariNote:["Bicchiere <b>€ 5</b> · Shot <b>€ 3</b>","Glass <b>€ 5</b> · Shot <b>€ 3</b>","Glas <b>€ 5</b> · Shot <b>€ 3</b>","Verre <b>€ 5</b> · Shot <b>€ 3</b>","Copa <b>€ 5</b> · Shot <b>€ 3</b>"],
+  amariNote:["Bicchiere <b>€ 5</b> · Shot come indicato","Glass <b>€ 5</b> · shots as listed","Glas <b>€ 5</b> · Shots wie angegeben","Verre <b>€ 5</b> · shots comme indiqué","Copa <b>€ 5</b> · chupitos según lista"],
   bottiglia:["Bottiglia","Bottle","Flasche","Bouteille","Botella"],
   vino:["Vino al calice","Wine by the glass","Wein im Glas","Vin au verre","Vino por copa"],
   prosecco:["Prosecco al calice","Prosecco by the glass","Prosecco im Glas","Prosecco au verre","Prosecco por copa"],
@@ -389,10 +389,11 @@ const GIN_SELEZIONE = [
 const WHISKY = [
   {n:"Jack Daniel's", b:"7", s:"4"},
   {n:"Ballantine's", b:"7", s:null},
+  {n:"Bushmills Black", b:"8", s:"4"},
   {n:"Johnnie Walker Black", b:"8", s:"4"},
   {n:"Johnnie Walker Double Black", b:"10", s:"6"},
-  {n:"Johnnie Walker Gold Label", b:"12", s:"6"},
-  {n:"Whisky Giapponese", b:"10", s:"5"}
+  {n:"Whisky Giapponese", b:"10", s:"5"},
+  {n:"Johnnie Walker Gold Label", b:"12", s:"6"}
 ];
 const RUM = [
   {n:"Bacardi", b:"5", s:"3"},
@@ -407,10 +408,28 @@ const RUM = [
 const TEQUILA = [
   {n:"Jose Cuervo Silver", b:null, s:"3"},
   {n:"Jose Cuervo Reposado", b:null, s:"3"},
+  {n:"Cazadores", b:null, s:"3"},
+  {n:"Altos Plata", b:null, s:"3"},
+  {n:"Casamigos", b:null, s:"6"},
   {n:"Don Julio Silver", b:null, s:"7"},
   {n:"Don Julio Reposado", b:null, s:"8"}
 ];
-const AMARI = ["Montenegro","Unicum","Jägermeister","Camatti","Amaro del Capo","Vermouth di Torino","Limoncello","Fernet Branca","Branca Menta","Baileys"];
+const AMARI = [
+  {n:"Montenegro", s:"3"},
+  {n:"Unicum", s:"3"},
+  {n:"Jägermeister", s:"3"},
+  {n:"Camatti", s:"3"},
+  {n:"Amaro del Capo", s:"3"},
+  {n:"Vermouth di Torino", s:"3"},
+  {n:"Limoncello", s:"3"},
+  {n:"Fernet Branca", s:"3"},
+  {n:"Branca Menta", s:"3"},
+  {n:"Baileys", s:"3"},
+  {n:"Disaronno", s:"3"},
+  {n:"Amaretto", s:"3"},
+  {n:"Jefferson", s:"4"},
+  {n:"Fireball", s:"4"}
+];
 
 /* ============================================================
    LOGICA — da qui in giù non serve modificare
@@ -558,7 +577,7 @@ function renderMenu(){
       sec.appendChild(gt);
       const box = document.createElement("div");
       box.className = "plist reveal";
-      box.innerHTML = AMARI.map(nameLine).join("");
+      box.innerHTML = AMARI.map(spiritLine).join("");
       sec.appendChild(box);
     }
     root.appendChild(sec);
