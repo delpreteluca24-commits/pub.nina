@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-08-01-B">
+<meta name="x-build" content="2026-08-01-C">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -328,8 +328,7 @@ const T = {
   prosecco:["Prosecco al calice","Prosecco by the glass","Prosecco im Glas","Prosecco au verre","Prosecco por copa"],
   analc:["Spritz analcolico","Non-alcoholic spritz","Alkoholfreier Spritz","Spritz sans alcool","Spritz sin alcohol"],
   vol:["Vol.","Vol.","Vol.","Vol.","Vol."],
-  tagliere:["Tagliere","Sharing board","Brettljause","Planche","Tabla"],
-  tagliereSub:["Tris di focaccine farcite: prosciutto crudo, rucola e pomodorini · gorgonzola e pomodorini secchi · salametto Milano e fontina.","Trio of stuffed focaccine: cured ham, rocket & cherry tomatoes · gorgonzola & sun-dried tomatoes · Milano salami & fontina.","Trio gefüllter Focaccine: Rohschinken, Rucola & Kirschtomaten · Gorgonzola & getrocknete Tomaten · Salame Milano & Fontina.","Trio de focaccine garnies : jambon cru, roquette & tomates cerises · gorgonzola & tomates séchées · salami Milano & fontina.","Trío de focaccine rellenas: jamón crudo, rúcula y tomatitos · gorgonzola y tomates secos · salami Milano y fontina."]
+  tagliere:["Tagliere","Sharing board","Brettljause","Planche","Tabla"]
 };
 
 const SEC = {
@@ -521,7 +520,7 @@ function renderMenu(){
     } else if(cid === "tagliere"){
       const box = document.createElement("div");
       box.className = "plist reveal";
-      box.innerHTML = simpleLine(T.tagliere[li], "€ 3", T.tagliereSub[li]);
+      box.innerHTML = simpleLine(T.tagliere[li], "€ 3");
       sec.appendChild(box);
     } else if(cid === "vini"){
       const box = document.createElement("div");
