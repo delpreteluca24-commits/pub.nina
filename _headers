@@ -1,0 +1,16 @@
+# ──────────────────────────────────────────────────────────────
+#  Regole di cache per il menù digitale — Cloudflare Pages
+#  Obiettivo: se cambi un prezzo, il cliente lo vede SUBITO.
+#
+#  public            → la copia può stare nella cache del browser
+#  max-age=0         → ma è considerata "già vecchia" all'istante
+#  must-revalidate   → prima di riusarla il browser DEVE richiedere
+#                      al server se è cambiata (riceve 304 se uguale,
+#                      così non riscarica; 200 col nuovo file se cambia)
+#
+#  In pratica: ad ogni apertura del menù si vede l'ultima versione.
+#  Cloudflare inoltre svuota la sua cache CDN a ogni deploy (git push).
+# ──────────────────────────────────────────────────────────────
+
+/*
+  Cache-Control: public, max-age=0, must-revalidate
