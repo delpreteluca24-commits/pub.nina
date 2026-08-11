@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-08-01-F">
+<meta name="x-build" content="2026-08-01-G">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -105,7 +105,7 @@ body{
 .card.primary .lb{font-size:19px;letter-spacing:.03em}
 .card.primary .sub{font-size:12px;color:var(--muted);margin-top:2px}
 .card.primary .arrow{color:var(--gold);font-size:24px}
-.card.review{border-color:var(--gold-soft)}
+.card.review{grid-column:1/-1;flex-direction:row;align-items:center;gap:10px;border-color:var(--gold-soft)}
 .card.review .lb{color:var(--gold)}
 .hidden{display:none!important}
 
@@ -235,15 +235,15 @@ noscript{display:block;padding:30px;text-align:center}
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-6.5-5.5-6.5-10.5a6.5 6.5 0 1 1 13 0C18.5 15.5 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></svg></span>
         <span class="lb" data-t="map">Mappa</span>
       </a>
+      <a class="card hidden" id="igBtn" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+        <span class="lb">Instagram</span>
+      </a>
       <a class="card review" id="revBtn" target="_blank" rel="noopener">
         <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.9 6.6 1-4.7 4.6 1.1 6.5L12 17.4l-5.9 3.1 1.1-6.5L2.5 9.4l6.6-1L12 2.5z"/></svg></span>
         <span class="lb" data-t="review">Lascia una recensione</span>
       </a>
       <!-- Instagram / Facebook: si mostrano da soli quando compili BIZ.instagram / BIZ.facebook -->
-      <a class="card hidden" id="igBtn" target="_blank" rel="noopener">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></span>
-        <span class="lb">Instagram</span>
-      </a>
       <a class="card hidden" id="fbBtn" target="_blank" rel="noopener">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.5 21v-7h2.6l.4-3h-3V9.1c0-.9.3-1.6 1.7-1.6h1.4V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H9v3h2.5v7"/></svg></span>
         <span class="lb">Facebook</span>
@@ -297,7 +297,7 @@ const BIZ = {
   address: "Via Sapri 73 — 19121 La Spezia (SP)",
   mapsUrl: "https://maps.app.goo.gl/eKJyrL3U2DXRG3Hh9?g_st=ic",
   reviewUrl: "https://maps.app.goo.gl/eKJyrL3U2DXRG3Hh9?g_st=ic",
-  instagram: "",                      // TODO: es. "https://instagram.com/xxxx" — vuoto = card nascosta
+  instagram: "https://www.instagram.com/ninacocktailbar",
   facebook: ""                        // TODO: vuoto = card nascosta
 };
 
