@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-08-01-G">
+<meta name="x-build" content="2026-10-23-H">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -320,6 +320,7 @@ const T = {
   ginSup:["Selezione","Selection","Auswahl","Sélection","Selección"],
   bicchiere:["Bicchiere","Glass","Glas","Verre","Copa"],
   mediaPiccola:["Media / Piccola","Large / Small","Groß / Klein","Grande / Petite","Grande / Pequeña"],
+  tavoloAsporto:["Al tavolo / Take away","Table / Take away","Im Lokal / Take away","À table / À emporter","En mesa / Para llevar"],
   birreNote:["Tutte disponibili in <b>media</b> e <b>piccola</b>","All available in <b>large</b> and <b>small</b>","Alle in <b>groß</b> und <b>klein</b>","Toutes en <b>grande</b> et <b>petite</b>","Todas en <b>grande</b> y <b>pequeña</b>"],
   bicShot:["Bicchiere / Shot","Glass / Shot","Glas / Shot","Verre / Shot","Copa / Shot"],
   amariNote:["Bicchiere <b>€ 5</b> · Shot come indicato","Glass <b>€ 5</b> · shots as listed","Glas <b>€ 5</b> · Shots wie angegeben","Verre <b>€ 5</b> · shots comme indiqué","Copa <b>€ 5</b> · chupitos según lista"],
@@ -335,6 +336,7 @@ const SEC = {
   cocktail:["Cocktail & Spritz","Cocktails & Spritz","Cocktails & Spritz","Cocktails & Spritz","Cócteles & Spritz"],
   spina:["Birre alla Spina","Draught Beers","Biere vom Fass","Bières pression","Cervezas de barril"],
   tagliere:["Tagliere","Sharing Board","Brettljause","Planche","Tabla"],
+  soft:["Soft Drink","Soft Drinks","Softdrinks","Boissons sans alcool","Refrescos"],
   vini:["Vini & Bollicine","Wines & Bubbles","Wein & Schaumwein","Vins & bulles","Vinos y burbujas"],
   gin:["Gin Tonic","Gin & Tonic","Gin Tonic","Gin Tonic","Gin Tonic"],
   whisky:["Whisky","Whisky","Whisky","Whisky","Whisky"],
@@ -342,21 +344,28 @@ const SEC = {
   tequila:["Tequila","Tequila","Tequila","Tequila","Tequila"],
   amari:["Amari & Liquori","Amari & Liqueurs","Amari & Liköre","Amari & Liqueurs","Amari y Licores"]
 };
-const ORDER = ["cocktail","spina","tagliere","vini","gin","whisky","rum","tequila","amari"];
+const ORDER = ["cocktail","spina","tagliere","soft","vini","gin","whisky","rum","tequila","amari"];
 
 /* ============================================================
    MENU - dati dalla titolare (prezzi reali)
    ============================================================ */
 const COCKTAILS = [
-  {p:"€ 8", l:["Spritz Hugo Saint Germain","Gin Lemon","Caipiroska","Caipiroska Frutta","Vodka Red Bull / Lemon","Vodka Tonic","Paloma","Whisky Sour","Moscow Mule","Daikiri","Long Island","Margarita / Tommy's Margarita","Mojito","Negroni","Negroni Sbagliato","Boulevardier","Caipirinha","Cocktail Martini","Cuba Libre","Fernet Cola"]},
+  {p:"€ 8", l:["Spritz Hugo Saint Germain","Gin Lemon","Caipiroska classica, pesca, cocco, fragola, passion fruit","Vodka Red Bull / Lemon","Vodka Tonic","Paloma","Whisky Sour","Moscow Mule","Espresso Martini","Daikiri","Long Island","Margarita / Tommy's Margarita","Mojito classico, cocco, fragola, passion fruit","Negroni","Negroni Sbagliato","Boulevardier","Caipirinha","Cocktail Martini","Cuba Libre","Fernet Cola"]},
   {p:"€ 7", l:["Spritz Campari","Spritz Limoncello","Spritz Venturo","Spritz Passoa","Virgin Mojito","Malibu Cola","Michelada","Americano"]},
   {p:"€ 6", l:["Spritz Aperol","Spritz Cynar","Analcolico alla Frutta"]}
 ];
 const BIRRE = [
   {n:"Ichnusa", p:"€ 6", ps:"€ 3"},
-  {n:"Messina Cristalli di Sale", p:"€ 7", ps:"€ 4"},
-  {n:"Blanche de Bruxelles", p:"€ 7", ps:"€ 4"},
-  {n:"Neck Oil Session IPA", p:"€ 7", ps:"€ 4"}
+  {n:"Messina Non Filtrata", p:"€ 7", ps:"€ 4"}
+];
+const SOFT = [
+  {n:"Fever Tree Tonica", p:"€ 4"},
+  {n:"Acqua Brillante Tonica", p:"€ 4"},
+  {n:"Ginger Beer", p:"€ 4"},
+  {n:"Coca Cola classica e Zero", p:"€ 4"},
+  {n:"Red Bull", p:"€ 4"},
+  {n:"Lemon Soda", p:"€ 4"},
+  {n:"Acqua naturale e frizzante", p:"€ 2 / € 1", sub:"tavoloAsporto"}
 ];
 const GIN_CLASSICI = [
   {n:"Beefeater", p:"€ 8"},
@@ -403,7 +412,7 @@ const RUM = [
   {n:"Don Papa", b:"8", s:"5"},
   {n:"Matusalem", b:"5", s:"3"},
   {n:"Barceló", b:"5", s:"3"},
-  {n:"Bumbu", b:"6", s:"4"}
+  {n:"Bumbu XO / Cream / The Original", b:"8", s:"4"}
 ];
 const TEQUILA = [
   {n:"Jose Cuervo Silver", b:null, s:"3"},
@@ -539,7 +548,12 @@ function renderMenu(){
     } else if(cid === "tagliere"){
       const box = document.createElement("div");
       box.className = "plist reveal";
-      box.innerHTML = simpleLine(T.tagliere[li], "€ 3");
+      box.innerHTML = simpleLine(T.tagliere[li], "€ 4");
+      sec.appendChild(box);
+    } else if(cid === "soft"){
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = SOFT.map(x => simpleLine(x.n, x.p, x.sub ? tt(x.sub) : "")).join("");
       sec.appendChild(box);
     } else if(cid === "vini"){
       const box = document.createElement("div");
