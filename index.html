@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-11-07-I">
+<meta name="x-build" content="2026-11-07-J">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -184,6 +184,8 @@ section.cat{padding-top:26px;scroll-margin-top:118px}
 .plist .li:last-child{border-bottom:none}
 .grp{font:700 10.5px system-ui;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.85;padding:15px 2px 5px}
 .grp:first-child{padding-top:4px}
+.empfoto{margin:0 0 12px;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface)}
+.empfoto img{display:block;width:100%;height:auto}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
@@ -325,6 +327,7 @@ const T = {
   navarroSolo:["Navarro Correas · Solo bottiglia","Navarro Correas · Bottle only","Navarro Correas · Nur Flasche","Navarro Correas · Bouteille uniquement","Navarro Correas · Solo botella"],
   viniCasa:["Vini della Casa","House Wines","Hausweine","Vins de la maison","Vinos de la casa"],
   viniAr:["Vini Argentini","Argentinian Wines","Argentinische Weine","Vins argentins","Vinos argentinos"],
+  empAlt:["Empanadas argentine appena sfornate","Freshly baked Argentinian empanadas","Frisch gebackene argentinische Empanadas","Empanadas argentines tout juste sorties du four","Empanadas argentinas recién horneadas"],
   birreNote:["Tutte disponibili in <b>media</b> e <b>piccola</b>","All available in <b>large</b> and <b>small</b>","Alle in <b>groß</b> und <b>klein</b>","Toutes en <b>grande</b> et <b>petite</b>","Todas en <b>grande</b> y <b>pequeña</b>"],
   bicShot:["Bicchiere / Shot","Glass / Shot","Glas / Shot","Verre / Shot","Copa / Shot"],
   amariNote:["Bicchiere <b>€ 5</b> · Shot come indicato","Glass <b>€ 5</b> · shots as listed","Glas <b>€ 5</b> · Shots wie angegeben","Verre <b>€ 5</b> · shots comme indiqué","Copa <b>€ 5</b> · chupitos según lista"],
@@ -341,6 +344,7 @@ const SEC = {
   spina:["Birre alla Spina","Draught Beers","Biere vom Fass","Bières pression","Cervezas de barril"],
   tagliere:["Tagliere","Sharing Board","Brettljause","Planche","Tabla"],
   soft:["Soft Drink","Soft Drinks","Softdrinks","Boissons sans alcool","Refrescos"],
+  empanadas:["Empanadas Argentinas","Empanadas Argentinas","Empanadas Argentinas","Empanadas Argentinas","Empanadas Argentinas"],
   vini:["Vini & Bollicine","Wines & Bubbles","Wein & Schaumwein","Vins & bulles","Vinos y burbujas"],
   gin:["Gin Tonic","Gin & Tonic","Gin Tonic","Gin Tonic","Gin Tonic"],
   whisky:["Whisky","Whisky","Whisky","Whisky","Whisky"],
@@ -348,7 +352,7 @@ const SEC = {
   tequila:["Tequila","Tequila","Tequila","Tequila","Tequila"],
   amari:["Amari & Liquori","Amari & Liqueurs","Amari & Liköre","Amari & Liqueurs","Amari y Licores"]
 };
-const ORDER = ["cocktail","spina","tagliere","soft","vini","gin","whisky","rum","tequila","amari"];
+const ORDER = ["cocktail","spina","tagliere","empanadas","soft","vini","gin","whisky","rum","tequila","amari"];
 
 /* ============================================================
    MENU - dati dalla titolare (prezzi reali)
@@ -370,6 +374,44 @@ const SOFT = [
   {n:"Red Bull", p:"€ 4"},
   {n:"Lemon Soda", p:"€ 4"},
   {n:"Acqua naturale e frizzante", p:"€ 2 / € 1", sub:"tavoloAsporto"}
+];
+const EMPANADAS = [
+  {n:"Carne Suave ARG", p:"€ 4,50", d:[
+    "Empanada argentina con ripieno di carne dal gusto delicato.",
+    "Argentinian empanada with a mild beef filling.",
+    "Argentinische Empanada mit mild gewürzter Rindfleischfüllung.",
+    "Empanada argentine à la viande de bœuf, goût doux.",
+    "Empanada argentina rellena de carne de sabor suave."]},
+  {n:"Carne Picante ARG", p:"€ 4,50", d:[
+    "Empanada argentina di carne con una nota piccante.",
+    "Argentinian beef empanada with a spicy kick.",
+    "Argentinische Rindfleisch-Empanada mit pikanter Note.",
+    "Empanada argentine à la viande avec une note piquante.",
+    "Empanada argentina de carne con un toque picante."]},
+  {n:"Asado y Provolone", p:"€ 4,50", d:[
+    "Empanada con asado argentino e provolone filante.",
+    "Empanada with Argentinian asado beef and melted provolone.",
+    "Empanada mit argentinischem Asado-Rindfleisch und geschmolzenem Provolone.",
+    "Empanada à l'asado argentin et provolone fondant.",
+    "Empanada con asado argentino y provolone fundido."]},
+  {n:"Espinaca y Queso", p:"€ 4,50", d:[
+    "Empanada con spinaci e formaggio cremoso.",
+    "Empanada with spinach and creamy cheese.",
+    "Empanada mit Spinat und cremigem Käse.",
+    "Empanada aux épinards et fromage crémeux.",
+    "Empanada de espinaca y queso cremoso."]},
+  {n:"Setas Gourmet", p:"€ 4,50", d:[
+    "Empanada gourmet ai funghi.",
+    "Gourmet empanada with mushrooms.",
+    "Gourmet-Empanada mit Pilzen.",
+    "Empanada gourmande aux champignons.",
+    "Empanada gourmet de setas."]},
+  {n:"Empanadas Argentinas", p:"€ 4,50", d:[
+    "Empanada classica argentina dal ripieno tradizionale.",
+    "Classic Argentinian empanada with a traditional filling.",
+    "Klassische argentinische Empanada mit traditioneller Füllung.",
+    "Empanada argentine classique à la farce traditionnelle.",
+    "Empanada argentina clásica de relleno tradicional."]}
 ];
 const VINI_AR = [
   {n:"Hereford Malbec 2025", p:"€ 28 / € 7", sub:"bottCalice"},
@@ -558,6 +600,15 @@ function renderMenu(){
       const box = document.createElement("div");
       box.className = "plist reveal";
       box.innerHTML = simpleLine(T.tagliere[li], "€ 4");
+      sec.appendChild(box);
+    } else if(cid === "empanadas"){
+      const fig = document.createElement("figure");
+      fig.className = "empfoto reveal";
+      fig.innerHTML = '<img src="empanadas-arg.webp" width="1100" height="733" loading="lazy" decoding="async" alt="' + tt("empAlt") + '">';
+      sec.appendChild(fig);
+      const box = document.createElement("div");
+      box.className = "plist reveal";
+      box.innerHTML = EMPANADAS.map(x => simpleLine(x.n, x.p, x.d[li])).join("");
       sec.appendChild(box);
     } else if(cid === "soft"){
       const box = document.createElement("div");
