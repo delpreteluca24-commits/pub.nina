@@ -6,7 +6,7 @@
 <title>NINA — Pub · La Spezia</title>
 <meta name="description" content="NINA — Pub e cocktail bar a La Spezia. Carta dei drink, contatti e recensioni.">
 <meta name="theme-color" content="#0f2018">
-<meta name="x-build" content="2026-10-23-H">
+<meta name="x-build" content="2026-11-07-I">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NINA">
 <meta property="og:title" content="NINA — Pub · La Spezia">
@@ -321,6 +321,10 @@ const T = {
   bicchiere:["Bicchiere","Glass","Glas","Verre","Copa"],
   mediaPiccola:["Media / Piccola","Large / Small","Groß / Klein","Grande / Petite","Grande / Pequeña"],
   tavoloAsporto:["Al tavolo / Take away","Table / Take away","Im Lokal / Take away","À table / À emporter","En mesa / Para llevar"],
+  bottCalice:["Bottiglia / Calice","Bottle / Glass","Flasche / Glas","Bouteille / Verre","Botella / Copa"],
+  navarroSolo:["Navarro Correas · Solo bottiglia","Navarro Correas · Bottle only","Navarro Correas · Nur Flasche","Navarro Correas · Bouteille uniquement","Navarro Correas · Solo botella"],
+  viniCasa:["Vini della Casa","House Wines","Hausweine","Vins de la maison","Vinos de la casa"],
+  viniAr:["Vini Argentini","Argentinian Wines","Argentinische Weine","Vins argentins","Vinos argentinos"],
   birreNote:["Tutte disponibili in <b>media</b> e <b>piccola</b>","All available in <b>large</b> and <b>small</b>","Alle in <b>groß</b> und <b>klein</b>","Toutes en <b>grande</b> et <b>petite</b>","Todas en <b>grande</b> y <b>pequeña</b>"],
   bicShot:["Bicchiere / Shot","Glass / Shot","Glas / Shot","Verre / Shot","Copa / Shot"],
   amariNote:["Bicchiere <b>€ 5</b> · Shot come indicato","Glass <b>€ 5</b> · shots as listed","Glas <b>€ 5</b> · Shots wie angegeben","Verre <b>€ 5</b> · shots comme indiqué","Copa <b>€ 5</b> · chupitos según lista"],
@@ -366,6 +370,11 @@ const SOFT = [
   {n:"Red Bull", p:"€ 4"},
   {n:"Lemon Soda", p:"€ 4"},
   {n:"Acqua naturale e frizzante", p:"€ 2 / € 1", sub:"tavoloAsporto"}
+];
+const VINI_AR = [
+  {n:"Hereford Malbec 2025", p:"€ 28 / € 7", sub:"bottCalice"},
+  {n:"Colección Privada Malbec 2025", p:"€ 42", sub:"navarroSolo"},
+  {n:"Colección Privada Cabernet Sauvignon 2023", p:"€ 42", sub:"navarroSolo"}
 ];
 const GIN_CLASSICI = [
   {n:"Beefeater", p:"€ 8"},
@@ -558,7 +567,11 @@ function renderMenu(){
     } else if(cid === "vini"){
       const box = document.createElement("div");
       box.className = "plist reveal";
-      box.innerHTML = simpleLine(T.vino[li], "€ 6 / € 7") + simpleLine(T.prosecco[li], "€ 6 / € 7") + simpleLine(T.bottiglia[li], "€ 25");
+      let h = '<div class="grp">' + tt("viniCasa") + '</div>';
+      h += simpleLine(T.vino[li], "€ 6 / € 7") + simpleLine(T.prosecco[li], "€ 6 / € 7") + simpleLine(T.bottiglia[li], "€ 25");
+      h += '<div class="grp">' + tt("viniAr") + '</div>';
+      h += VINI_AR.map(x => simpleLine(x.n, x.p, tt(x.sub))).join("");
+      box.innerHTML = h;
       sec.appendChild(box);
     } else if(cid === "gin"){
       const box = document.createElement("div");
